@@ -1,0 +1,7 @@
+apiVersion: v2
+name: k8s-demo
+description: A Helm chart for k8s-demo
+
+type: application
+version: 0.0.1
+appVersion: 0.0.1

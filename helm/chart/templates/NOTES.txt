@@ -1,0 +1,5 @@
+Access k8s-demo using:
+{{- $hostname := .Values.ingress.host -}}
+{{- range .Values.ingress.paths }}
+  http://{{ $hostname }}{{ .path }}
+{{- end }}

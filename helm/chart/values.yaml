@@ -1,0 +1,31 @@
+# Default values for k8s-demo's helm chart.
+image:
+  - repository: k8s-demo-client-img
+    containerPort: 3000
+    pullPolicy: IfNotPresent
+  - repository: k8s-demo-server-img
+    containerPort: 8000
+    pullPolicy: IfNotPresent
+
+service:
+  - name: client
+    port: 8001
+    targetPort: 3000
+  - name: server
+    port: 8002
+    targetPort: 8000
+
+ingress:
+  host: localhost
+  paths:
+    - path: "/client"
+      port: 8001
+    - path: "/server"
+      port: 8002
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80

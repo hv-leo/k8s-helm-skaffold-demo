@@ -1,0 +1,6 @@
+description = "k8s-demo client"
+
+task buildImage(type:Exec) {
+	workingDir "."
+	commandLine "docker", "image", "build", "-t", "${clientImgName}:${version}", "."
+}

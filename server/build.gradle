@@ -1,0 +1,6 @@
+description = "k8s-demo server"
+
+task buildImage(type:Exec) {
+	workingDir "."
+	commandLine "docker", "image", "build", "-t", "${serverImgName}:${version}", "."
+}

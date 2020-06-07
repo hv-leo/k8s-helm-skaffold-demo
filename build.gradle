@@ -1,0 +1,26 @@
+allprojects {
+	repositories {
+		mavenCentral()
+	}
+	group = 'com.leonardo.coelho'
+	version = '0.0.1'
+}
+
+ext {
+    clientImgName = "${project.name}-client-img"
+    serverImgName = "${project.name}-server-img"
+}
+
+task buildApp {
+    dependsOn(":client:buildImage")
+    dependsOn(":server:buildImage")
+	dependsOn(":helm:helmChartPackage")
+}
+
+task deployApp(type:Exec) {
+	dependsOn("buildApp")
+	def chartLocation = project(":helm").buildDir
+
+	workingDir "."
+	commandLine "helm", "upgrade", "--install", "${project.name}", "${chartLocation}/${project.name}-${version}.tgz"
+}
