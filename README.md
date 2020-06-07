@@ -9,8 +9,9 @@ To access the application:
 ![K8s Demo Web App](https://github.com/LeonardoCoelho71950/k8s-demo/blob/master/docs/k8s-demo-app.png "K8s Demo Web App")
 
 ### Installation
-- To **build** the demo (build docker images and the helm chart) : ```.\gradlew buildApp```
+- To **build** the demo (build docker images and package the helm chart) : ```.\gradlew buildApp```
 - To **build and deploy** the demo into a Kubernetes cluster: ```.\gradlew deployApp```
+- To **continuously deploy** the demo: ```skaffold dev```
 
 ### Kubernetes Architecture
 - Client and Server are running in different Docker **containers**, inside a single **pod**.

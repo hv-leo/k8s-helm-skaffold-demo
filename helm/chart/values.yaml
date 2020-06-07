@@ -1,11 +1,12 @@
 # Default values for k8s-demo's helm chart.
-image:
-  - repository: k8s-demo-client-img
-    containerPort: 3000
-    pullPolicy: IfNotPresent
-  - repository: k8s-demo-server-img
-    containerPort: 8000
-    pullPolicy: IfNotPresent
+
+# enable/disable continuous deployment.
+skaffold: false
+
+clientImage: k8s-demo-client-img
+clientContainerPort: 3000
+serverImage: k8s-demo-server-img
+serverContainerPort: 8000
 
 service:
   - name: client

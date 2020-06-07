@@ -15,13 +15,23 @@ spec:
     spec:
       serviceAccountName: default
       containers:
-      {{- $version := .Chart.AppVersion -}}
-      {{- range .Values.image }}
-        - name: {{ .repository }}
-          image: "{{ .repository }}:{{ $version }}"
-          imagePullPolicy: {{ .pullPolicy }}
+        - name: client
+          {{ if not .Values.skaffold }}
+          image: "{{ .Values.clientImage }}:{{ .Chart.AppVersion }}"
+          {{ else }}
+          image: "{{ .Values.clientImage }}"
+          {{ end }}
           ports:
             - name: http
-              containerPort: {{ .containerPort }}
+              containerPort: {{ .Values.clientContainerPort }}
               protocol: TCP
-      {{- end }}
+        - name: server
+          {{ if not .Values.skaffold }}
+          image: "{{ .Values.serverImage }}:{{ .Chart.AppVersion }}"
+          {{ else }}
+          image: "{{ .Values.serverImage }}"
+          {{ end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.serverContainerPort }}
+              protocol: TCP

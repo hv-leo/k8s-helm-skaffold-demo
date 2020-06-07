@@ -1,0 +1,27 @@
+apiVersion: skaffold/v1beta15
+kind: Config
+metadata:
+  name: skaffold-k8s-demo
+build:
+  artifacts:
+    - image: k8s-demo-client-img
+      context: ./client
+      sync:
+        infer:
+          - "*/*.js"
+    - image: k8s-demo-server-img
+      context: ./server
+      sync:
+        infer:
+          - "*/*.py"
+deploy:
+  helm:
+    releases:
+      - name: k8s-demo
+        chartPath: helm/chart
+        values:
+          clientImage: k8s-demo-client-img
+          serverImage: k8s-demo-server-img
+        setValues:
+          # enable continuous deployment.
+          skaffold: true

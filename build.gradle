@@ -22,5 +22,5 @@ task deployApp(type:Exec) {
 	def chartLocation = project(":helm").buildDir
 
 	workingDir "."
-	commandLine "helm", "upgrade", "--install", "${project.name}", "${chartLocation}/${project.name}-${version}.tgz"
+	commandLine "helm", "install", "${project.name}", "${chartLocation}/${project.name}-${version}.tgz"
 }
